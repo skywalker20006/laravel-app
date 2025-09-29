@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\OrderController;
 
 Route::get('/', function () {
     // Redirect to products.index by default
@@ -136,3 +137,5 @@ Route::post('/cart/add/{product}', function (\App\Models\Product $product) {
 })->name('cart.add');
 
 
+// Route for the order page
+Route::get('/order', [OrderController::class, 'index'])->name('order');

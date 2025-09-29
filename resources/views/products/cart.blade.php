@@ -30,25 +30,22 @@
                     <p class="text-gray-600">Your cart is empty.</p>
                 @endforelse
 
-                {{-- Total Price (below cart items) --}}
-                @if($cartItems->count() > 0)
-                    <div class="mt-6 p-4 bg-gray-100 rounded-lg flex justify-between items-center">
-                        <h3 class="font-semibold text-lg">Total Price:</h3>
-                        <p class="font-bold text-xl">₨{{ number_format($totalPrice, 2) }}</p>
-                    </div>
-                @endif
-
             </div>
         </div>
     </div>
 
-    {{-- Fixed Total Price at bottom --}}
+    {{-- Fixed Total Price at bottom (sticky and center-aligned) --}}
     @if($cartItems->count() > 0)
-        <div class="fixed bottom-4 left-0 w-full max-w-5xl mx-auto px-6">
-            <div class="p-4 bg-gray-100 rounded-lg flex justify-between items-center shadow">
-                <h3 class="font-semibold text-lg">Total Price:</h3>
+        <!-- <div class="flex justify-center bg-green-100 bottom-4 left-0 w-full max-w-5xl mx-auto px-6"> -->
+            <div class="flex justify-center p-4 bg-gray-100 rounded-lg flex justify-center items-center shadow">
+                <h3 class="font-semibold text-lg mr-4">Total Price:</h3>
                 <p class="font-bold text-xl">₨{{ number_format($totalPrice, 2) }}</p>
+
+                <!-- Order Button -->
+                <a href="{{ route('order') }}" class="ml-4 py-2 px-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
+                    Order
+                </a>
             </div>
-        </div>
+        
     @endif
 </x-app-layout>
