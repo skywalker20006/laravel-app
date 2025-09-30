@@ -50,11 +50,13 @@
                         </div>
                     </div>
 
-                    <div class="text-center mt-6">
-                        <button class="py-3 px-6 bg-green-600 text-white rounded-lg hover:bg-green-700 transition duration-300">
+                    <form method="POST" action="{{ route('order.place') }}">
+                        @csrf
+                        <button type="submit" class="py-3 px-6 bg-green-600 text-white rounded-lg hover:bg-green-700 transition duration-300">
                             Confirm Order
                         </button>
-                    </div>
+                    </form>
+
                 </div>
 
             </div>

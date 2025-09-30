@@ -137,5 +137,15 @@ Route::post('/cart/add/{product}', function (\App\Models\Product $product) {
 })->name('cart.add');
 
 
-// Route for the order page
-Route::get('/order', [OrderController::class, 'index'])->name('order');
+
+Route::middleware(['auth:sanctum', 'verified'])->group(function () {
+    // Order page (with cart items and total price)
+    Route::get('/order', [OrderController::class, 'index'])->name('order.index');
+
+    // Place order (POST request)
+    Route::post('/place-order', [OrderController::class, 'placeOrder'])->name('order.place');
+
+    // Checkout page (order summary)
+    Route::get('/checkout/{orderId}', [OrderController::class, 'checkout'])->name('checkout');
+});
+

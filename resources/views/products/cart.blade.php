@@ -42,7 +42,7 @@
                 <p class="font-bold text-xl">₨{{ number_format($totalPrice, 2) }}</p>
 
                 <!-- Order Button -->
-                <a href="{{ route('order') }}" class="ml-4 py-2 px-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
+                <a href="{{ route('order.index') }}" class="ml-4 py-2 px-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
                     Order
                 </a>
             </div>
