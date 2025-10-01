@@ -30,4 +30,11 @@ Route::middleware('auth:sanctum')->group(function () {
     // Cart routes
     Route::post('/cart/add/{product}', [CartController::class, 'add']);
     Route::delete('/cart/{id}', [CartController::class, 'remove']);
+
+    // Viewing the cart items (protected route)
+    Route::get('/cart', [CartController::class, 'index']);
+
+    // Update cart item quantity
+    Route::put('/cart/update/{id}', [CartController::class, 'update']);
 });
+
