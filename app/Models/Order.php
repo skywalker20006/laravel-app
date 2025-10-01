@@ -16,4 +16,13 @@ class Order extends Model
         // Assuming each order has many cart items
         return $this->hasMany(Cart::class, 'order_id');
     }
+
+
+    // app/Models/Order.php
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);  // Make sure this is defined
+    }    
+
 }

@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\CartController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController; 
+use App\Http\Controllers\Api\ApiOrderController;
 
 
 
@@ -36,5 +37,14 @@ Route::middleware('auth:sanctum')->group(function () {
 
     // Update cart item quantity
     Route::put('/cart/update/{id}', [CartController::class, 'update']);
+
+
+
+
+
+    // Order routes
+    Route::get('/order', [ApiOrderController::class, 'index']);  // View order summary
+    Route::post('/place-order', [ApiOrderController::class, 'placeOrder']);  // Place an order
+    Route::get('/order/{orderId}', [ApiOrderController::class, 'checkout']);  // View order details (checkout)
 });
 
