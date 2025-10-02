@@ -157,3 +157,11 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('/admin', [AdminController::class, 'index'])->name('admin');
 });
 
+
+
+Route::get('/', function () {
+    $arts = \App\Models\Product::where('category', 'arts')->take(4)->get(); // Limit to 4 products
+    $collectibles = \App\Models\Product::where('category', 'collectibles')->take(4)->get(); // Limit to 4 products
+
+    return view('products.index', compact('arts', 'collectibles'));
+})->name('products.index');
