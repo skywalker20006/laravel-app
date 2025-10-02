@@ -5,7 +5,7 @@
             <div class="flex">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
-                    <a href="{{ route('products.index') }}">
+                    <a href="{{ route('home') }}">
                         <img src="{{ asset('images/logo.jpg') }}" alt="Your Logo" class="block h-16 w-auto">
                     </a>
                 </div>

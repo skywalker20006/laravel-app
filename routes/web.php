@@ -160,17 +160,20 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
 
 
 Route::get('/', function () {
-    $arts = \App\Models\Product::where('category', 'arts')->take(4)->get(); // Limit to 4 products
-    $collectibles = \App\Models\Product::where('category', 'collectibles')->take(4)->get(); // Limit to 4 products
+    // Fetch 4 arts products
+    $arts = \App\Models\Product::where('category', 'arts')->take(4)->get(); // Fetch only 4 products
 
+    // Fetch 4 collectibles products
+    $collectibles = \App\Models\Product::where('category', 'collectibles')->take(4)->get(); // Fetch only 4 products
+
+    // Pass the data to the index view
     return view('products.index', compact('arts', 'collectibles'));
 })->name('products.index');
 
 
-Route::post('/logout', function () {
-    auth()->logout();
-    return redirect()->route('login'); // Or your login route name
-})->name('logout');
+
+
+
 
 
 
@@ -199,3 +202,15 @@ Route::get('/', function () {
     // If not authenticated, redirect to the register page
     return redirect()->route('register');
 })->name('home');
+
+
+
+
+Route::get('/', function () {
+    $arts = \App\Models\Product::where('category', 'arts')->take(4)->get(); // Fetch 4 arts products
+    $collectibles = \App\Models\Product::where('category', 'collectibles')->take(4)->get(); // Fetch 4 collectibles
+
+    return view('products.homepage', compact('arts', 'collectibles'));
+})->name('home');
+
+
