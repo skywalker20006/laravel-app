@@ -13,8 +13,8 @@ class Order extends Model
 
     public function cartItems()
     {
-        // Assuming each order has many cart items
-        return $this->hasMany(Cart::class, 'order_id');
+        // Fetch all cart items associated with the user who placed this order
+        return $this->hasMany(Cart::class, 'user_id', 'user_id');  // Fixed to use 'user_id' instead of 'order_id'
     }
 
 

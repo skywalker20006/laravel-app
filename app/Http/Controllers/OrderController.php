@@ -63,4 +63,20 @@ class OrderController extends Controller
         // Pass the order data to the checkout page (we're not going to pull cart items here)
         return view('products.checkout', compact('order'));
     }
+
+    //this below thing fetches the order and passes it to the orderdetails.blade.php
+    // app/Http/Controllers/OrderController.php
+
+    public function viewOrderDetails()
+    {
+        // Fetch all pending orders for the authenticated user
+        $orders = Order::where('user_id', auth()->id())  // Get orders for the authenticated user
+                        ->where('status', 'pending')  // Optionally filter for pending orders
+                        ->with('cartItems.product')  // Eager load cart items and products
+                        ->get();
+
+        // Return the order details view with all orders data
+        return view('products.orderdetails', compact('orders'));
+    }
+
 }

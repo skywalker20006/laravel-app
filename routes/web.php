@@ -147,5 +147,8 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
 
     // Checkout page (order summary)
     Route::get('/checkout/{orderId}', [OrderController::class, 'checkout'])->name('checkout');
+
+    // Order details route
+    Route::get('/order/{orderId}', [OrderController::class, 'viewOrderDetails'])->name('order.details');
 });
 
