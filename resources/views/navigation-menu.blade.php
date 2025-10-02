@@ -31,10 +31,12 @@
                         {{ __('Cart') }}
                     </x-nav-link>
 
-                      <!-- Admin Link (For now, accessible to everyone) -->
-                    <x-nav-link href="{{ route('admin') }}" :active="request()->routeIs('admin')">
-                        {{ __('Admin') }}
-                    </x-nav-link>
+                    <!-- Admin Link (For now, accessible to everyone) -->
+                    @if(auth()->user()->role == 'admin')
+                        <x-nav-link href="{{ route('admin') }}" :active="request()->routeIs('admin')">
+                            {{ __('Admin') }}
+                        </x-nav-link>
+                    @endif
 
                     <!-- Order Details Link (New Link) -->
                     <x-nav-link href="{{ route('order.details', ['orderId' => 1]) }}" :active="request()->routeIs('order.details')">

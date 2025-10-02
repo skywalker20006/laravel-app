@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\AdminController;
+
 
 Route::get('/', function () {
     // Redirect to products.index by default
@@ -39,10 +41,7 @@ Route::middleware([
         return view('products.cart'); // Cart page
     })->name('cart');
 
-    // Route for the admin dashboard page
-    Route::get('/admin', function () {
-        return view('products.admin'); // Admin dashboard page
-    })->name('admin');
+    //i had my old admin route i deleted here
 
     // Handle the form submission for creating a product
     Route::post('/admin/create', function () {
@@ -150,5 +149,11 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
 
     // Order details route
     Route::get('/order/{orderId}', [OrderController::class, 'viewOrderDetails'])->name('order.details');
+});
+
+
+//new shit for the admin column i added in the db so only dulya should see the admin page
+Route::middleware(['auth:sanctum', 'verified'])->group(function () {
+    Route::get('/admin', [AdminController::class, 'index'])->name('admin');
 });
 
