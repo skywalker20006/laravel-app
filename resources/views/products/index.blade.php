@@ -7,8 +7,8 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-
+            <!-- Added some margin and shadow to make the container look more spacious -->
+            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-6 mb-8"> 
                 <!-- Section for Arts -->
                 <div class="mb-8">
                     <h3 class="text-2xl font-semibold mb-4">Arts</h3>

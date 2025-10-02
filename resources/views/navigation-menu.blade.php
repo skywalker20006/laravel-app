@@ -31,8 +31,8 @@
                         {{ __('Cart') }}
                     </x-nav-link>
 
-                    <!-- Admin Link (For now, accessible to everyone) -->
-                    @if(auth()->user()->role == 'admin')
+                    <!-- Admin Link (For now, accessible to admin users only) -->
+                    @if(auth()->check() && auth()->user()->role == 'admin')
                         <x-nav-link href="{{ route('admin') }}" :active="request()->routeIs('admin')">
                             {{ __('Admin') }}
                         </x-nav-link>
@@ -42,7 +42,6 @@
                     <x-nav-link href="{{ route('order.details', ['orderId' => 1]) }}" :active="request()->routeIs('order.details')">
                         {{ __('Order Details') }}
                     </x-nav-link>
-
                 </div>
             </div>
 

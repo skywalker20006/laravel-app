@@ -165,3 +165,37 @@ Route::get('/', function () {
 
     return view('products.index', compact('arts', 'collectibles'));
 })->name('products.index');
+
+
+Route::post('/logout', function () {
+    auth()->logout();
+    return redirect()->route('login'); // Or your login route name
+})->name('logout');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//this should fix the issue with the server link. when i click on the server link instead of an error it should give me the register page
+Route::get('/', function () {
+    // Check if the user is authenticated
+    if (auth()->check()) {
+        return view('products.index'); // If authenticated, show the home page (or any page you want)
+    }
+    
+    // If not authenticated, redirect to the register page
+    return redirect()->route('register');
+})->name('home');
