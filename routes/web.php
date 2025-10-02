@@ -192,25 +192,18 @@ Route::get('/', function () {
 
 
 
-//this should fix the issue with the server link. when i click on the server link instead of an error it should give me the register page
 Route::get('/', function () {
     // Check if the user is authenticated
     if (auth()->check()) {
-        return view('products.index'); // If authenticated, show the home page (or any page you want)
+        $arts = \App\Models\Product::where('category', 'arts')->take(4)->get(); // Fetch only 4 arts products
+        $collectibles = \App\Models\Product::where('category', 'collectibles')->take(4)->get(); // Fetch only 4 collectibles
+
+        // Pass the data to the homepage view
+        return view('products.homepage', compact('arts', 'collectibles'));
     }
     
     // If not authenticated, redirect to the register page
     return redirect()->route('register');
-})->name('home');
-
-
-
-
-Route::get('/', function () {
-    $arts = \App\Models\Product::where('category', 'arts')->take(4)->get(); // Fetch 4 arts products
-    $collectibles = \App\Models\Product::where('category', 'collectibles')->take(4)->get(); // Fetch 4 collectibles
-
-    return view('products.homepage', compact('arts', 'collectibles'));
 })->name('home');
 
 
