@@ -36,10 +36,14 @@ class OrderController extends Controller
             return $item->product->price * $item->quantity;
         });
 
+        // Add tax calculation (example: 10% tax)
+        $tax = $totalPrice * 0.10; // 10% tax
+        $totalWithTax = $totalPrice + $tax;
+
         // Create the order in the orders table
         $order = Order::create([
             'user_id' => auth()->id(),
-            'total_price' => $totalPrice,
+            'total_price' => $totalWithTax,  // Store price with tax
             'status' => 'pending', // Default status is 'pending'
         ]);
 
@@ -57,16 +61,14 @@ class OrderController extends Controller
 
         // Check if the order exists
         if (!$order) {
-          return redirect()->route('cart')->with('error', 'Order not found!');
+            return redirect()->route('cart')->with('error', 'Order not found!');
         }
 
         // Pass the order data to the checkout page (we're not going to pull cart items here)
         return view('products.checkout', compact('order'));
     }
 
-    //this below thing fetches the order and passes it to the orderdetails.blade.php
-    // app/Http/Controllers/OrderController.php
-
+    // Fetch the order and pass it to the orderdetails.blade.php
     public function viewOrderDetails()
     {
         // Fetch all pending orders for the authenticated user
@@ -79,4 +81,30 @@ class OrderController extends Controller
         return view('products.orderdetails', compact('orders'));
     }
 
+    // Store order and include tax calculation (this was added as the storeOrder method)
+    public function storeOrder(Request $request)
+    {
+        // Assuming you already have the cart items and total price calculated
+        $cartItems = Cart::where('user_id', auth()->id())->get();
+        $totalPrice = $cartItems->sum(function($item) {
+            return $item->product->price * $item->quantity;
+        });
+
+        // Add tax calculation (example: 10% tax)
+        $tax = $totalPrice * 0.10; // 10% tax
+        $totalWithTax = $totalPrice + $tax;
+
+        // Store the order with the total price including tax
+        $order = Order::create([
+            'user_id' => auth()->id(),
+            'total_price' => $totalWithTax, // Store price with tax
+            'status' => 'pending', // Status is 'pending'
+        ]);
+
+        // After placing the order, clear the cart
+        Cart::where('user_id', auth()->id())->delete();
+
+        // Redirect to the checkout page with the new order
+        return redirect()->route('checkout', ['orderId' => $order->id]);
+    }
 }
