@@ -9,10 +9,8 @@
         <div class="max-w-3xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-6">
 
-                <h3 class="text-lg font-semibold text-gray-700 mb-4">Welcome to the Admin Dashboard</h3>
-                <p class="text-gray-600 mb-6">This is where you can manage the products (add, update, delete, etc.).</p>
-
                 <!-- Add Product Form -->
+                <h3 class="text-lg font-semibold text-gray-700 mb-4">Add New Product</h3>
                 <form method="POST" action="{{ route('admin.create') }}" enctype="multipart/form-data" class="space-y-4">
                     @csrf
 
@@ -61,8 +59,39 @@
                             Add Product
                         </button>
                     </div>
-
                 </form>
+
+                <!-- List of Existing Products -->
+                <h3 class="text-lg font-semibold text-gray-700 mt-8 mb-4">Existing Products</h3>
+                <table class="min-w-full bg-white border border-gray-300 rounded-lg">
+                    <thead>
+                        <tr>
+                            <th class="px-6 py-3 border-b text-left text-sm font-semibold text-gray-700">Title</th>
+                            <th class="px-6 py-3 border-b text-left text-sm font-semibold text-gray-700">Category</th>
+                            <th class="px-6 py-3 border-b text-left text-sm font-semibold text-gray-700">Price</th>
+                            <th class="px-6 py-3 border-b text-left text-sm font-semibold text-gray-700">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($products as $product)
+                            <tr>
+                                <td class="px-6 py-4 border-b text-sm text-gray-600">{{ $product->title }}</td>
+                                <td class="px-6 py-4 border-b text-sm text-gray-600">{{ ucfirst($product->category) }}</td>
+                                <td class="px-6 py-4 border-b text-sm text-gray-600">₨{{ number_format($product->price, 2) }}</td>
+                                <td class="px-6 py-4 border-b text-sm text-gray-600">
+                                    <!-- Edit Button -->
+                                    <a href="{{ route('admin.edit', $product->id) }}" class="text-blue-600 hover:underline">Edit</a>
+                                    <!-- Delete Button -->
+                                    <form method="POST" action="{{ route('admin.delete', $product->id) }}" class="inline-block">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="text-red-600 hover:underline ml-4">Delete</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>

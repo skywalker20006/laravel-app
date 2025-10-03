@@ -207,3 +207,23 @@ Route::get('/', function () {
 })->name('home');
 
 
+
+
+
+//this should pull products and i should be able to edit and delete em it the admin page
+Route::middleware(['auth:sanctum', 'verified'])->group(function () {
+    // Admin route to display all products
+    Route::get('/admin', [AdminController::class, 'index'])->name('admin');
+
+    // Edit product route
+    Route::get('/admin/edit/{id}', [AdminController::class, 'edit'])->name('admin.edit');
+
+    // Update product route
+    Route::put('/admin/update/{id}', [AdminController::class, 'update'])->name('admin.update');
+
+    // Delete product route
+    Route::delete('/admin/delete/{id}', [AdminController::class, 'destroy'])->name('admin.delete');
+});
+
+
+
