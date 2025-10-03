@@ -25,7 +25,7 @@
                 </div>
 
                 <div class="text-center mt-6">
-                    <a href="{{ route('products.index') }}" class="py-3 px-6 bg-green-600 text-white rounded-lg hover:bg-green-700 transition duration-300">
+                    <a href="{{ route('home') }}" class="py-3 px-6 bg-green-600 text-white rounded-lg hover:bg-green-700 transition duration-300">
                         Continue Shopping
                     </a>
                 </div>
